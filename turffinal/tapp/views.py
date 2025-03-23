@@ -302,9 +302,25 @@ def searchturf(request):
     datashp=turf.objects.filter(status="approved").all()
     return render(request,"allturfs.html",{"data":datashp})
 
+# def guest(request): 
+#     datashp=turf.objects.filter(status="approved").all()
+#     return render(request,"guest.html",{"data":datashp})
+
 def guest(request): 
-    datashp=turf.objects.filter(status="approved").all()
-    return render(request,"guest.html",{"data":datashp})
+    selected_address = request.GET.get("turf_address", "")
+
+    # Get unique turf addresses
+    unique_addresses = turf.objects.filter(status="approved").values_list("turf_address", flat=True).distinct()
+
+    # Filter turfs based on selected address
+    if selected_address:
+        datashp = turf.objects.filter(status="approved", turf_address=selected_address)
+    else:
+        datashp = turf.objects.filter(status="approved")
+
+    return render(request, "guest.html", {"data": datashp, "unique_addresses": unique_addresses})
+
+
 
 def book(request):
     s1 = request.GET.get("s1")

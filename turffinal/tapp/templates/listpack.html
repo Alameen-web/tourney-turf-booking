@@ -13,8 +13,8 @@
             <h1 class="display-3 text-white mb-3 animated slideInDown">{{ d.turf_name }}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb text-uppercase">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Turf Details</li>
+                    <li class="breadcrumb-item"><a href="{% url "guest" %}">All Turfs</a></li>
+                    <li class="breadcrumb-item text-black active" aria-current="page">Turf Details</li>
                 </ol>
             </nav>
         </div>
@@ -45,10 +45,9 @@
                                     <p>Type: {{ package.pack_type }}</p>
                                     <!-- <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
                                         data-bs-target="#bookingModal-{{ package.packid }}">Book</button> -->
-                                        <a class="dropdown-item" href="{% url "index" %}" data-toggle="modal" data-target="#logoutModal1{{ package.packid }}">
-                       
+                                        <a class="dropdown-item" href="{% url "index" %}">
                                             <i class="fas fa-sign-out-alt"></i>
-                                            <span>Register</span></a>
+                                            <span style="color: blue;">Register to Continue</span></a>
                                     
                                     <!-- Booking Modal -->
                                     {% comment %} <div class="modal fade" id="logoutModal1{{ package.packid }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
