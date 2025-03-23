@@ -143,10 +143,6 @@ urlpatterns=[
     # path('clubTicketList',views.clubTicketList,name="clubTicketList"),
 
 
-
-
-
-
     path('usershome',views.usershome,name="usershome"),
     path('userPrivacy',views.userPrivacy,name="userPrivacy"),
     path('searchturf',views.searchturf,name='searchturf'),

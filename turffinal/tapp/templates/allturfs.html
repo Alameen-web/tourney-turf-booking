@@ -6,9 +6,19 @@
     <div class="row">
         <div class="col-lg-12 card-margin">
             <h1 class="text-center latestitems">All turf</h1>
-            <form name="f1" method="post" action="{% url 'searchturf' %}">
+               <!-- Filter Form -->
+               <form name="f1" method="get" action="{% url 'guest' %}">
                 {% csrf_token %}
-                </form>
+                <label for="turf_address">Filter by Location:</label>
+                <select name="turf_address" id="turf_address" onchange="this.form.submit()">
+                    <option value="">All</option>
+                    {% for address in unique_addresses %}
+                        <option value="{{ address }}" {% if request.GET.turf_address == address %}selected{% endif %}>
+                            {{ address }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
             <div class="container-fluid mt-5">
 
                 <div class="demo">

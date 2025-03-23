@@ -236,22 +236,6 @@
                   <tr>
                     <td>
                       <div class="form-group">
-                        <label for="">Email ID</label>
-                        <input type="email" name="user_email" class="form-control" value="" style="width:450px;"
-                          required id="email">
-                      </div>
-                    </td>
-                    <td>
-                      <div class="form-group">
-                        <label for="">Contact number</label>
-                        <input type="text" name="user_contact" class="form-control" value="" style="width:450px;"
-                          maxlength="10" minlength="10" required>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-group">
                         <label for="">District</label>
 
                         <Select name="district" class="form-control" value="" id="districtu"
@@ -273,21 +257,37 @@
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="form-group">
-                        <label for="">Username</label>
-                        <input type="text" name="username" class="form-control" value="" style="width:450px;" required>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="form-group1">
-                        <label for="">Password</label>
-                        <input type="password" name="password" class="form-control" value="" style="width:450px;"
-                          required>
+                </tr>
+                <td>
+                  <div class="form-group">
+                    <label for="">Username</label>
+                    <input type="text" name="username" class="form-control" value="" style="width:450px;" required>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group1">
+                    <label for="">Password</label>
+                    <input type="password" name="password" class="form-control" value="" style="width:450px;"
+                        required>
                       </div>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <label for="">Email ID</label>
+                        <input type="email" name="user_email" class="form-control" value="" style="width:450px;"
+                        required id="email">
+                      </div>
+                    </td>
+                    {% comment %} <td>
+                      <div class="form-group">
+                        <label for="">Contact number</label>
+                        <input type="text" name="user_contact" class="form-control" value="" style="width:450px;"
+                        maxlength="10" minlength="10" required>
+                        </div>
+                        </td> {% endcomment %}
+                        <tr>
                 </table><br>
                 <button name="save" type="submit" class="btn btn-success"><span
                     class="glyphicon glyphicon-ok-sign"></span> Submit</button>
@@ -571,84 +571,84 @@
                       </div>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td>
-                      <div class="form-group">
-                        <label for="">Email id</label>
-                        <input type="email" name="turf_email" class="form-control" value="" style="width:450px;"
-                          required id="email">
-                      </div>
-                    </td>
-                    <td>
-                      <div class="form-group">
-                        <label for="">Address</label>
-                        <input type="text" name="turf_address" class="form-control" value="" style="width:450px;"
-                          required>
-                      </div>
-                    </td>
-                  </tr>
                   <tr>
                     <td>
                       <div class="form-group">
                         <label for="">District</label>
-
+                        
                         <Select name="district" class="form-control" value="" id="district"
-                          onchange="getdistt(this.value)" style="width:450px;" required>
-                          <option value="select">--Select--</option>
-                          {% for d in datast %}
-                          <option value="{{d.district_id}}">{{d.district}}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                    </td>
+                        onchange="getdistt(this.value)" style="width:450px;" required>
+                        <option value="select">--Select--</option>
+                        {% for d in datast %}
+                        <option value="{{d.district_id}}">{{d.district}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </td>
                     <td>
                       <div class="form-group">
                         <label for="">Location</label>
                         <Select name="location" class="form-control" id="locationt" onchange="sh(this.value)"
-                          style="width:450px;" required>
-                          <option value="">--Select--</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="form-group">
-                        <label for="">Username</label>
-                        <input type="text" name="username" class="form-control" value="" style="width:450px;" required>
-                      </div>
+                        style="width:450px;" required>
+                        <option value="">--Select--</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <div class="form-group">
+                      <label for="">Username</label>
+                      <input type="text" name="username" class="form-control" value="" style="width:450px;" required>
+                    </div>
                     </td>
                     <td>
                       <div class="form-group">
                         <label for="">Password</label>
                         <input type="password" name="password" class="form-control" value="" style="width:450px;"
-                          required>
+                        required>
                       </div>
                     </td>
                   </tr>
-                  <tr>
+                  {% comment %} <tr>
                     <td>
                       <div class="form-group">
                         <label for="">Photo</label>
                         <input type="file" name="club_banner" class="form-control" value="" style="width:450px;"
-                          accept="images/*" required>
+                        accept="images/*" required>
                       </div>
                     </td>
-                  </tr>
+                  </tr> {% endcomment %}
+                  
+                                    <tr>
+                                      <td>
+                                        <div class="form-group">
+                                          <label for="">Email id</label>
+                                          <input type="email" name="turf_email" class="form-control" value="" style="width:450px;"
+                                            required id="email">
+                                        </div>
+                                      </td>
+                                      {% comment %} <td>
+                                        <div class="form-group">
+                                          <label for="">Address</label>
+                                          <input type="text" name="turf_address" class="form-control" value="" style="width:450px;"
+                                            required>
+                                        </div>
+                                      </td> {% endcomment %}
+                                    </tr>
                 </table><br>
                 <button name="save" type="submit" class="btn btn-success"><span
-                    class="glyphicon glyphicon-ok-sign"></span> Submit</button>
-                <button type="reset" class="btn btn-default pull-right" data-bs-dismiss="modal" aria-label="Close"><span
+                  class="glyphicon glyphicon-ok-sign"></span> Submit</button>
+                  <button type="reset" class="btn btn-default pull-right" data-bs-dismiss="modal" aria-label="Close"><span
                     class="glyphicon glyphicon-remove"></span> No</button>
-            </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
-        </div>
-        </form>
-      </div>
-<!-- 
-      </div>
+          <!-- 
+            </div>
       </div>
       </div> -->
 

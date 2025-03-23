@@ -30,7 +30,7 @@
 								  
 								  <!--<td><?php echo $row['u_adhar']?></td>-->
 								  <td>{{d.user_email}}</td>
-								  <td>{{d.user_contact}}</td>
+								  <td>{{d.user_phone}}</td>
                              <td><a class="btn btn-success" data-toggle="modal" data-target="#approve-{{d.user_id}}" href="#">Approve / Reject</a>
 									</td>
 		<div class="modal fade" id="approve-{{d.user_id}}" role="dialog" >
@@ -58,12 +58,12 @@
 		</div>
 		
 		</div>
-		<div class="col-md-5">
+		{% comment %} <div class="col-md-5">
             <div class="form-group">
                 <label for="">Contact Number</label>
                <input type="text" class="form-control" name="user_contact" value="{{d.user_contact}}" readonly>
                </div>
-		
+		 {% endcomment %}
 	   
 		
 		<div class="form-group">

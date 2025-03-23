@@ -211,7 +211,7 @@ def userreg(request):
     user_name=request.POST["user_name"]
     user_phone=request.POST["user_phone"]
     user_email=request.POST["user_email"]
-    user_contact=request.POST["user_contact"]
+    # user_contact=request.POST["user_contact"]
     user_district=request.POST["district"]
     did=dist.objects.get(district_id=user_district)
     user_location=request.POST["location"]
@@ -220,7 +220,7 @@ def userreg(request):
     password=request.POST["password"]
     log.objects.create(username=username,password=password,role="user")
     datal=log.objects.last()
-    usr.objects.create(login=datal,user_name=user_name,user_phone=user_phone,user_email=user_email,user_contact=user_contact,district=did,locations=sid,status="waiting")
+    usr.objects.create(login=datal,user_name=user_name,user_phone=user_phone,user_email=user_email,district=did,locations=sid,status="waiting")
     response = redirect('/index')
     return response
 
@@ -298,13 +298,27 @@ def userPrivacy(request):
 
     return render(request,"userPrivacy.html",{"msg":msg})
 
-def searchturf(request): 
-    datashp=turf.objects.filter(status="approved").all()
-    return render(request,"allturfs.html",{"data":datashp})
+# def searchturf(request): 
+#     datashp=turf.objects.filter(status="approved").all()
+#     return render(request,"allturfs.html",{"data":datashp})
 
 # def guest(request): 
 #     datashp=turf.objects.filter(status="approved").all()
 #     return render(request,"guest.html",{"data":datashp})
+
+def searchturf(request): 
+    selected_address = request.GET.get("turf_address", "")
+
+    # Get unique turf addresses
+    unique_addresses = turf.objects.filter(status="approved").values_list("turf_address", flat=True).distinct()
+
+    # Filter turfs based on selected address
+    if selected_address:
+        datashp = turf.objects.filter(status="approved", turf_address=selected_address)
+    else:
+        datashp = turf.objects.filter(status="approved")
+
+    return render(request, "allturfs.html", {"data": datashp, "unique_addresses": unique_addresses})
 
 def guest(request): 
     selected_address = request.GET.get("turf_address", "")
@@ -478,10 +492,10 @@ def shopProfileUpdate(request):
         name = request.POST['name']
         email = request.POST['email']
         phone = request.POST['phone']
-        address = request.POST['address']
+        # address = request.POST['address']
        
 
-        usr.objects.filter(user_id=shopid).update(user_name=name,user_email=email,user_phone=phone,user_contact=address)
+        usr.objects.filter(user_id=shopid).update(user_name=name,user_email=email,user_phone=phone)
     response = redirect('/shopProfile')
     return response
 
@@ -775,9 +789,11 @@ def itemlist(request):
 #turf
 def turfreg(request):
     turf_name=request.POST["turf_name"]
-    turf_address=request.POST["turf_address"]
+    # turf_address=request.POST["turf_address"]
     turf_phone=request.POST["turf_phone"]
     turf_email=request.POST["turf_email"]
+    turf_squarefeet=request.POST["turf_squarefeet"]
+    turf_ownername=request.POST["turf_ownername"]
     turf_district=request.POST["district"]
     did=dist.objects.get(district_id=turf_district)
     turf_location=request.POST["location"]
@@ -786,7 +802,7 @@ def turfreg(request):
     password=request.POST["password"]
     log.objects.create(username=username,password=password,role="")
     datal=log.objects.last()
-    turf.objects.create(login=datal,turf_name=turf_name,turf_address=turf_address,turf_phone=turf_phone,turf_email=turf_email,district=did,locations=sid,status="waiting")
+    turf.objects.create(login=datal,turf_name=turf_name,turf_address=did.district,turf_phone=turf_phone,turf_squarefeet=turf_squarefeet,turf_ownername=turf_ownername,turf_email=turf_email,district=did,locations=sid,status="waiting")
     response = redirect('/index')
     return response
 

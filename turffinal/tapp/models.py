@@ -18,6 +18,7 @@ class turf(models.Model):
     locations=models.ForeignKey("locations",on_delete=models.CASCADE, null=True)
     login=models.ForeignKey(login,on_delete=models.CASCADE,null=True)
     status=models.CharField("status",max_length=100)
+    turf_location=models.CharField("turf_location",max_length=100)
 
 class user(models.Model):
     user_id=models.AutoField(primary_key=True)

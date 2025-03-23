@@ -6,7 +6,7 @@
         <title>guest</title>
         <style>
             body {
-                background: #dcdcdc;
+                background: hsl(0, 0%, 100%);
                 margin-top: 20px;
             }
         
@@ -361,11 +361,13 @@
                                                                         <div class="pricing-content">
                                                                             <ul>
                                                                                 <li><b>{{ d.turf_phone }}</b></li>
+                                                                                {% comment %} <li><b>{{ d.turf_location }}</b></li> {% endcomment %}
                                                                                 <li><b>{{ d.turf_address }}</b></li>
                                                                             </ul>
                                                                         </div>
                                                                         <div class="pricingTable-signup">
-                                                                            <a href="{% url 'listpack' %}?s1={{ d.turf_id }}">Package</a>
+                                                                            <a style="text-decoration: none;"
+                                                                             href="{% url 'listpack' %}?s1={{ d.turf_id }}">Package</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
