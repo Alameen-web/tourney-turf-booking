@@ -72,29 +72,7 @@ class locations(models.Model):
     location = models.CharField("location",max_length=100)
     district = models.ForeignKey(district,on_delete=models.CASCADE,null=True)
 
-class rentitems(models.Model):
-    rentid = models.AutoField(primary_key=True)
-    rent_turf = models.ForeignKey(turf,on_delete=models.CASCADE,null=True)
-    item_name = models.CharField("item_name",max_length=100)
-    item_image = models.FileField("item_image",max_length=500,upload_to="rentItems/")
-    item_rph = models.IntegerField()
-    item_status = models.CharField("item_status",max_length=100)
 
-class rentbookings(models.Model):
-    rbookid = models.AutoField(primary_key=True)
-    rent_item = models.ForeignKey(rentitems,on_delete=models.CASCADE,null=True)
-    turf = models.ForeignKey(turf,on_delete=models.CASCADE,null=True)
-    rent_hours = models.IntegerField()
-    rbook_date = models.CharField("rbook_date",max_length=100)
-    rent_user = models.ForeignKey(user,on_delete=models.CASCADE,null=True)
-    book_status = models.CharField("book_status",max_length=100)
-    pay_status = models.CharField("pay_status",max_length=100)
-
-class payments(models.Model):
-    payment_id = models.AutoField(primary_key=True)
-    rent_book = models.ForeignKey(rentbookings,on_delete=models.CASCADE,null=True)
-    amount = models.IntegerField()
-    pay_date = models.CharField("pay_status",max_length=100)
 
 
     

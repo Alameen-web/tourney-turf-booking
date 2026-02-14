@@ -72,18 +72,7 @@ urlpatterns=[
     path('turfAddComplaint',views.turfAddComplaint,name="turfAddComplaint"),
     path('turfProfile',views.turfProfile,name="turfProfile"),
     path('turfProfileUpdate',views.turfProfileUpdate,name="turfProfileUpdate"),
-    # path('turfAddItems',views.turfAddItems,name="turfAddItems"),
-    # path('turfAddItemsProcess',views.turfAddItemsProcess,name="turfAddItemsProcess"),
-    # path('turfRentItems',views.turfRentItems,name="turfRentItems"),
-    # path('turfRentItemUpdate',views.turfRentItemUpdate,name="turfRentItemUpdate"),
-    # path('turfRentItemDelete',views.turfRentItemDelete,name="turfRentItemDelete"),
-    # path('turfRentItemNewBookings',views.turfRentItemNewBookings,name="turfRentItemNewBookings"),
-    # path('turfRentItemBookingApprove',views.turfRentItemBookingApprove,name="turfRentItemBookingApprove"),
-    # path('turfRentItemBookingReject',views.turfRentItemBookingReject,name="turfRentItemBookingReject"),
-    # path('turfRentItemApprovedBookings',views.turfRentItemApprovedBookings,name="turfRentItemApprovedBookings"),
-    # path('turfRentItemRejectedBookings',views.turfRentItemRejectedBookings,name="turfRentItemRejectedBookings"),
-    # path('turfRentItemCancelledBookings',views.turfRentItemCancelledBookings,name="turfRentItemCancelledBookings"),
-    # path('turfRentItemBookingRefund',views.turfRentItemBookingRefund,name="turfRentItemBookingRefund"),
+
 
 
 
