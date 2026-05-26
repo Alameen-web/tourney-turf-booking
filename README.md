@@ -74,10 +74,11 @@ The project was simplified from a mixed older codebase. Removed pieces include s
 
 ## Free Deployment
 
-The simplest free deployment target for this project is PythonAnywhere.
+The project has deployment notes for PythonAnywhere and Railway.
 
-See:
+See these guides:
 
 ```text
 deployment/pythonanywhere.md
+deployment/railway.md
 ```
