@@ -1,21 +1,43 @@
-*.pyc
-*__pycache__*
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django / local runtime files
 db.sqlite3
+*.sqlite3
 media/
+staticfiles/
+*.log
+*.err
+
+# Environment and secrets
 .env
+.env.*
+!.env.example
+venv/
+env/
+env2/
+.venv/
+
+# Editor / OS files
 .idea/
 .vscode/
-venv/
-env2/
-*.log
+desktop.ini
+.DS_Store
+
+# Local cleanup/debug helper files
+cleanup_script*.py
+find_shop.py
+shop_results.txt
+history.txt
+project summary.txt
 traceback.txt
 pip_list.txt
 verification_results.txt
 execute_verification.py
 run_check.py
-cleanup_script_migrations.py
 shell.md
 shell.txt
 cancel
-history.txt
 error_log.txt
