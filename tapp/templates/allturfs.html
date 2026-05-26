@@ -5,10 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 card-margin">
-            <h1 class="text-center latestitems">Turfs</h1>
-            <form name="f1" method="post" action="{% url 'searchturf' %}">
-                {% csrf_token %}
-                </form>
+            <h1 class="text-center latestitems">Available Turfs</h1>
             <div class="container-fluid mt-5">
 
                 <div class="demo">
@@ -35,13 +32,18 @@
                                 </div>
 
                                 <div class="pricingTable-signup">
-                                  <a href="{% url 'book' %}?s1={{d.turf_id}}">BUY</a>
+                                  <a href="{% url 'book' %}?s1={{d.turf_id}}">Book</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-1">&nbsp;</div>
 
+                        {% empty %}
+                        <div class="col-12 text-center bg-white rounded p-5">
+                            <h4>No turfs available</h4>
+                            <p class="mb-0">Approved turfs will appear here.</p>
+                        </div>
                         {% endfor %}
                         </div></div></div></div></div></div></div><br><br>
 

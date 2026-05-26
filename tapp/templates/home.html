@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Tourney - Turf Booking{% endblock %}
+
+{% block content %}
+<section class="hero" style="background-image: linear-gradient(90deg, rgba(10, 20, 14, .78), rgba(10, 20, 14, .38)), url('{% static "images/turf.jpg" %}')">
+  <div class="hero-content">
+    <p class="eyebrow">Turf booking made simple</p>
+    <h1>Find a turf, choose a package, send a booking request.</h1>
+    <div class="hero-actions">
+      <a class="button primary" href="{% url 'turf_list' %}">Browse turfs</a>
+      <a class="button light" href="{% url 'register_turf' %}">Register a turf</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="stats">
+    <div><strong>{{ turf_count }}</strong><span>approved turfs</span></div>
+    <div><strong>{{ booking_count }}</strong><span>booking requests</span></div>
+    <div><strong>SQLite</strong><span>portable database</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Available Turfs</h2>
+    <a href="{% url 'turf_list' %}">View all</a>
+  </div>
+  <div class="grid">
+    {% for turf in turfs %}
+      <article class="card">
+        <h3>{{ turf.turf_name }}</h3>
+        <p>{{ turf.turf_address }}</p>
+        <p class="muted">{{ turf.place }}</p>
+        <a class="button small" href="{% url 'turf_detail' turf.turf_id %}">Details</a>
+      </article>
+    {% empty %}
+      <p>No approved turfs yet. Log in as admin and approve a turf.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

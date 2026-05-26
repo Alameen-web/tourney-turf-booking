@@ -1,77 +1,73 @@
-# Tourney - Turf Booking System
+# Tourney
 
-A streamlined Django-based web application for managing turf bookings. Owners can register their turfs and packages, while users can search for turfs and book play sessions.
+Tourney is a small Django turf booking project. It keeps the core workflow only:
 
-## 🚀 Features
+- users register and log in
+- turf owners register their turf
+- admins approve turf registrations
+- users browse approved turfs and request bookings
+- turf owners approve or cancel booking requests
+- users can view booking history
 
-- **User Authentication**: Secure login and registration for Admins, Users, and Turf Owners.
-- **Turf Management**: Dedicated dashboard for Turf Owners to manage their properties and session packages.
-- **Booking System**: Users can search for turfs by district and location, view available packages, and book slots.
-- **Admin Dashboard**: Centralized control for managing districts, locations, and approving/rejecting user and turf registrations.
-- **Notifications & Feedback**: System for users to provide feedback and for owners to handle bookings.
+## Tech Stack
 
-## 🛠️ Tech Stack
+- Python
+- Django
+- SQLite
 
-- **Backend**: Django (Python)
-- **Database**: SQLite (Small, portable, and efficient)
-- **Frontend**: HTML5, CSS3 (SB Admin 2 template), JavaScript (jQuery, Bootstrap)
-- **Environment**: Python Virtual Environment (`venv`)
+XAMPP and MySQL are not required for the current version.
 
-## 📦 Installation & Setup
+## Setup
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/alameenShameer/Tourney.git
-   cd Tourney/turffinal
-   ```
+```bash
+cd turffinal
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python seed_data.py
+python manage.py runserver
+```
 
-2. **Set up the Virtual Environment**:
-   ```bash
-   python -m venv venv
-   source venv/Scripts/activate  # On Windows: venv\Scripts\activate
-   ```
+Open `http://127.0.0.1:8000/`.
 
-3. **Install Dependencies**:
-   ```bash
-   pip install django requests
-   ```
-
-4. **Initialize the Database**:
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
-
-5. **Seed Test Data** (Optional but recommended):
-   ```bash
-   python seed_data.py
-   ```
-
-6. **Run the Server**:
-   ```bash
-   python manage.py runserver 8001
-   ```
-   Access the app at `http://127.0.0.1:8001/`.
-
-## 👥 Demo Accounts
+## Demo Accounts
 
 | Role | Username | Password |
-| :--- | :--- | :--- |
-| **Admin** | `admin` | `admin123` |
-| **User** | `user` | `user123` |
-| **Turf Owner** | `turf` | `turf123` |
+| --- | --- | --- |
+| Admin | `admin` | `admin123` |
+| User | `user` | `user123` |
+| Turf owner | `turf` | `turf123` |
 
-## 📁 Project Structure
+## Useful URLs
 
-- `tapp/`: Main application directory containing models, views, and templates.
-- `turf/`: Project configuration settings and URL rooting.
-- `media/`: Directory for uploaded package images and files.
-- `templates/`: HTML templates organized by functional areas.
+- `/` - home page
+- `/turfs/` - turf listing
+- `/login/` - login
+- `/register/user/` - user registration
+- `/register/turf/` - turf owner registration
+- `/site-admin/` - simple project admin dashboard
+- `/django-admin/` - Django's built-in admin
 
-## 🧹 Refactoring Notes
+## Project Structure
 
-This project has been recently refactored to:
-- Remove legacy "Shop" and "Club" features.
-- Switch from MySQL to SQLite for easier portability.
-- Modularize view logic for better maintainability.
-- Clean up unused templates and routes.
+```text
+turffinal/
+  manage.py
+  seed_data.py
+  requirements.txt
+  turf/
+    settings.py
+    urls.py
+  tapp/
+    models.py
+    forms.py
+    urls.py
+    views/core.py
+    templates/
+    static/tapp/site.css
+```
+
+## Refactor Notes
+
+The project was simplified from a mixed older codebase. Removed pieces include shop/club routes, mobile API stubs, rent item imports, duplicate booking URLs, large unused frontend templates, and copied vendor static folders.

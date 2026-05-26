@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings - Tourney{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-heading">
+    <h1>My Bookings</h1>
+    <a href="{% url 'turf_list' %}">Book another turf</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Turf</th>
+          <th>Package</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.turf.turf_name }}</td>
+            <td>{{ booking.package.pack_name }}</td>
+            <td>Rs {{ booking.package.pack_rate }}</td>
+            <td><span class="badge">{{ booking.status }}</span></td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="5">You have no bookings yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

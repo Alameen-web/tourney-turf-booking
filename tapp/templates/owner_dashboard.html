@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Owner Dashboard - Tourney{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-heading">
+    <h1>Owner Dashboard</h1>
+  </div>
+
+  <div class="dashboard-grid">
+    <section class="panel">
+      <h2>Turf Details</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="save_turf">
+        {{ turf_form.as_p }}
+        <button class="button primary" type="submit">Save turf</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Add Package</h2>
+      {% if turf %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="add_package">
+          {{ package_form.as_p }}
+          <button class="button primary" type="submit">Add package</button>
+        </form>
+      {% else %}
+        <p>Save turf details first, then add packages.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <section class="panel stretch">
+    <h2>Packages</h2>
+    <div class="grid compact">
+      {% for package in packages %}
+        <article class="card">
+          <h3>{{ package.pack_name }}</h3>
+          <p>{{ package.pack_type }}</p>
+          <strong>Rs {{ package.pack_rate }}</strong>
+        </article>
+      {% empty %}
+        <p>No packages added yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="panel stretch">
+    <h2>Booking Requests</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Package</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for booking in bookings %}
+            <tr>
+              <td>{{ booking.date }}</td>
+              <td>{{ booking.user.user_name }}</td>
+              <td>{{ booking.package.pack_name }}</td>
+              <td><span class="badge">{{ booking.status }}</span></td>
+              <td class="actions">
+                {% if booking.status == "waiting" %}
+                  <form method="post" action="{% url 'owner_booking_action' booking.pbookid 'approve' %}">
+                    {% csrf_token %}
+                    <button class="button small" type="submit">Approve</button>
+                  </form>
+                  <form method="post" action="{% url 'owner_booking_action' booking.pbookid 'cancel' %}">
+                    {% csrf_token %}
+                    <button class="button small danger" type="submit">Cancel</button>
+                  </form>
+                {% else %}
+                  <span class="muted">Done</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="5">No booking requests yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}

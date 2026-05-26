@@ -70,7 +70,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'searchturf' %}">
                     <i class="fas fa-cube"></i>
-                    <span>Turf</span></a>
+                    <span>Browse Turfs</span></a>
             </li>
 
 
@@ -79,12 +79,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-plot"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-calendar-check"></i>
-                    <span>List Package Bookings</span>
+                    <span>My Bookings</span>
                 </a>
                 <div id="collapse-plot" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Package Bookings</h6>
-                        <a class="collapse-item" href="{% url 'usrPackageNewBookings' %}">New Bookings</a>
+                        <h6 class="collapse-header">Bookings</h6>
+                        <a class="collapse-item" href="{% url 'usrPackageNewBookings' %}">Pending Bookings</a>
                         <a class="collapse-item" href="{% url 'usrPackageApprovedBookings' %}">Approved Bookings</a>
                         <!-- <a class="collapse-item" href="{% url 'turfPackageRescheduleRequests' %}">Reschedule Requests</a>
                         <a class="collapse-item" href="{% url 'turfPackageRescheduledBookings' %}">Rescheduled Bookings</a> -->
@@ -170,8 +170,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ request.session.username
-                                    }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ request.session.username|default:"User" }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{% static 'admins/img/undraw_profile.svg' %}">
                             </a>
@@ -206,7 +205,7 @@
 
                 <div class="d-flex align-items-center flex-column w-100" style="padding-top: 200px;">
                     <i class="fas fa-user fa-5x"></i>
-                    <h3 class="pt-3">Welcome {{request.session.username}}</h3>
+                    <h3 class="pt-3">Welcome {{ request.session.username|default:"User" }}</h3>
                 </div>
 
 

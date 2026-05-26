@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Tourney{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'tapp/site.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{% url 'home' %}">Tourney</a>
+    <nav class="nav">
+      <a href="{% url 'turf_list' %}">Turfs</a>
+      {% if request.session.role == "user" %}
+        <a href="{% url 'booking_history' %}">My Bookings</a>
+      {% elif request.session.role == "turf" %}
+        <a href="{% url 'owner_dashboard' %}">Owner</a>
+      {% elif request.session.role == "admin" %}
+        <a href="{% url 'admin_dashboard' %}">Admin</a>
+      {% endif %}
+      {% if request.session.username %}
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <div class="message {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

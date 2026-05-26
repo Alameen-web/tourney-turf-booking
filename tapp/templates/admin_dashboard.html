@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Tourney{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-heading">
+    <h1>Admin Dashboard</h1>
+  </div>
+
+  <div class="stats">
+    <div><strong>{{ approved_users }}</strong><span>approved users</span></div>
+    <div><strong>{{ approved_turfs }}</strong><span>approved turfs</span></div>
+    <div><strong>{{ bookings|length }}</strong><span>recent bookings</span></div>
+  </div>
+
+  <div class="dashboard-grid">
+    <section class="panel">
+      <h2>Add District</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_district">
+        {{ district_form.as_p }}
+        <button class="button primary" type="submit">Add district</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Add Location</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_location">
+        {{ location_form.as_p }}
+        <button class="button primary" type="submit">Add location</button>
+      </form>
+    </section>
+  </div>
+
+  <section class="panel stretch">
+    <h2>Pending Turf Approvals</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Turf</th><th>Owner</th><th>Location</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          {% for turf in pending_turfs %}
+            <tr>
+              <td>{{ turf.turf_name }}</td>
+              <td>{{ turf.turf_ownername }}</td>
+              <td>{{ turf.place }}</td>
+              <td class="actions">
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="approve_turf">
+                  <input type="hidden" name="turf_id" value="{{ turf.turf_id }}">
+                  <button class="button small" type="submit">Approve</button>
+                </form>
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="reject_turf">
+                  <input type="hidden" name="turf_id" value="{{ turf.turf_id }}">
+                  <button class="button small danger" type="submit">Reject</button>
+                </form>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="4">No pending turfs.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel stretch">
+    <h2>Pending User Approvals</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>User</th><th>Email</th><th>Location</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          {% for user in pending_users %}
+            <tr>
+              <td>{{ user.user_name }}</td>
+              <td>{{ user.user_email }}</td>
+              <td>{{ user.locations }}</td>
+              <td class="actions">
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="approve_user">
+                  <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                  <button class="button small" type="submit">Approve</button>
+                </form>
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="reject_user">
+                  <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                  <button class="button small danger" type="submit">Reject</button>
+                </form>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="4">No pending users.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}

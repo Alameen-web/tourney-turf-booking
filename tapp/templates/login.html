@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Tourney{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <div class="panel narrow">
+    <h1>Login</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="button primary" type="submit">Login</button>
+    </form>
+    <div class="split-links">
+      <a href="{% url 'register_user' %}">Create user account</a>
+      <a href="{% url 'register_turf' %}">Register turf</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

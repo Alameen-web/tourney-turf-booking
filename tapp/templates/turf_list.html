@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Turfs - Tourney{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-heading">
+    <h1>Turfs</h1>
+  </div>
+
+  <form class="filters" method="get">
+    <input type="search" name="q" placeholder="Search by turf or address" value="{{ filters.q }}">
+    <select name="district">
+      <option value="">All districts</option>
+      {% for district in districts %}
+        <option value="{{ district.district_id }}" {% if filters.district == district.district_id|stringformat:"s" %}selected{% endif %}>{{ district.district }}</option>
+      {% endfor %}
+    </select>
+    <select name="location">
+      <option value="">All locations</option>
+      {% for location in locations %}
+        <option value="{{ location.location_id }}" {% if filters.location == location.location_id|stringformat:"s" %}selected{% endif %}>{{ location.location }}</option>
+      {% endfor %}
+    </select>
+    <button class="button" type="submit">Filter</button>
+  </form>
+
+  <div class="grid">
+    {% for turf in turfs %}
+      <article class="card">
+        <h2>{{ turf.turf_name }}</h2>
+        <p>{{ turf.turf_address }}</p>
+        <p class="muted">{{ turf.place }}</p>
+        <a class="button small" href="{% url 'turf_detail' turf.turf_id %}">View details</a>
+      </article>
+    {% empty %}
+      <p>No turfs matched your search.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

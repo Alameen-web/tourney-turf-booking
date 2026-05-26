@@ -1,79 +1,79 @@
 import os
-import django
-from datetime import date
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'turf.settings')
+import django
+from django.contrib.auth.hashers import make_password
+
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "turf.settings")
 django.setup()
 
-from tapp.models import *
+from tapp.models import AccountRole, ApprovalStatus, District, Locations, Login, Package, Turf, User
+
+
+def account(username, password, role):
+    obj, created = Login.objects.get_or_create(
+        username=username,
+        defaults={"password": make_password(password), "role": role},
+    )
+    if not created:
+        obj.role = role
+        if obj.password == password:
+            obj.password = make_password(password)
+        obj.save(update_fields=["role", "password"])
+    return obj
+
 
 def seed():
-    print("Seeding data...")
+    district, _ = District.objects.get_or_create(district="Ernakulam")
+    location, _ = Locations.objects.get_or_create(location="Kochi", district=district)
 
-    # Create Districts
-    d1, created = district.objects.get_or_create(district="Ernakulam")
-    d2, created = district.objects.get_or_create(district="Kottayam")
-    
-    # Create Locations
-    l1, created = locations.objects.get_or_create(location="Kochi", district=d1)
-    l2, created = locations.objects.get_or_create(location="Pala", district=d2)
+    account("admin", "admin123", AccountRole.ADMIN)
 
-    # 1. Admin
-    if not login.objects.filter(role="admin").exists():
-        admin_login = login.objects.create(username="admin", password="admin123", role="admin")
-        print("Admin user created: admin/admin123")
-    else:
-        print("Admin user already exists.")
+    user_login = account("user", "user123", AccountRole.USER)
+    User.objects.get_or_create(
+        login=user_login,
+        defaults={
+            "user_name": "John Doe",
+            "user_phone": "9876543210",
+            "user_email": "john@example.com",
+            "user_contact": "Kochi",
+            "district": district,
+            "locations": location,
+            "status": ApprovalStatus.APPROVED,
+        },
+    )
 
-    # 2. User
-    if not login.objects.filter(username="user").exists():
-        user_login = login.objects.create(username="user", password="user123", role="user")
-        user.objects.create(
-            login=user_login,
-            user_name="John Doe",
-            user_phone="9876543210",
-            user_email="john@example.com",
-            user_contact="123 Street",
-            district=d1,
-            locations=l1,
-            status="approved"
-        )
-        print("User created: user/user123")
-    else:
-        print("User already exists.")
+    turf_login = account("turf", "turf123", AccountRole.TURF)
+    turf, _ = Turf.objects.get_or_create(
+        login=turf_login,
+        defaults={
+            "turf_name": "Soccer City",
+            "turf_address": "Kochi Bypass",
+            "turf_phone": "9998887776",
+            "turf_email": "turf@example.com",
+            "turf_ownername": "Turf Owner",
+            "turf_squarefeet": "5000",
+            "district": district,
+            "locations": location,
+            "status": ApprovalStatus.APPROVED,
+        },
+    )
 
-    # 3. Turf Owner
-    if not login.objects.filter(username="turf").exists():
-        turf_login = login.objects.create(username="turf", password="turf123", role="turf")
-        turf_obj = turf.objects.create(
-            login=turf_login,
-            turf_name="Soccer City",
-            turf_address="Kochi Bypass",
-            turf_phone="9998887776",
-            turf_email="turf@example.com",
-            district=d1,
-            locations=l1,
-            status="approved",
-            turf_ownername="Turf Owner",
-            turf_squarefeet="5000"
-        )
-        print("Turf Owner created: turf/turf123")
-    else:
-        turf_obj = turf.objects.filter(login__username="turf").first()
-        print("Turf Owner already exists.")
+    Package.objects.get_or_create(
+        pack_turf=turf,
+        pack_name="Morning 5s",
+        defaults={
+            "pack_rate": 1000,
+            "pack_type": "5s",
+            "pack_status": ApprovalStatus.APPROVED,
+        },
+    )
 
-    if turf_obj and not package.objects.filter(pack_turf=turf_obj).exists():
-        package.objects.create(
-            pack_name="Morning 5s",
-            pack_rate="1000",
-            pack_type="5s",
-            pack_turf=turf_obj,
-            pack_status="approved",
-            pack_image="package/dummy.jpg"
-        )
-        print("Package created for Turf Owner")
+    print("Demo data ready.")
+    print("Admin: admin / admin123")
+    print("User: user / user123")
+    print("Turf owner: turf / turf123")
 
-    print("Seeding complete.")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     seed()

@@ -16,7 +16,7 @@
 <div class="container-fluid">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">New Package Bookings</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ title|default:"Bookings" }}</h1>
     </div>
 
     <div class="row w-100">
@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">Sl:No</th>
-                            <th>User details</th>
+                            <th>Turf details</th>
                             <th>Package details</th>
                             <th>Date</th>
                             <th style="text-align: center;">Status</th>
@@ -38,9 +38,9 @@
                         <tr>
                             <td style="text-align: center;">{{forloop.counter}}</td>
                             <td>
-                                {{d.user.user_name}}<br>
-                                {{d.user.user_phone}}<br>
-                                {{d.user.user_email}}
+                                {{d.turf.turf_name}}<br>
+                                {{d.turf.turf_phone}}<br>
+                                {{d.turf.turf_email}}
                             </td>
                             <td>
                                 {{d.package.pack_name}}<br>
@@ -53,6 +53,10 @@
                             <td style="text-align: center; display: flex; justify-content: center;">
                                 {{d.status}}
                             </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-4">No bookings found.</td>
                         </tr>
                         {% endfor %}
                     </tbody>

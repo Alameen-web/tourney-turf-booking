@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ turf.turf_name }} - Tourney{% endblock %}
+
+{% block content %}
+<section class="section two-column">
+  <div>
+    <p class="eyebrow">Turf details</p>
+    <h1>{{ turf.turf_name }}</h1>
+    <p>{{ turf.turf_address }}</p>
+    <dl class="details">
+      <dt>Location</dt><dd>{{ turf.place }}</dd>
+      <dt>Phone</dt><dd>{{ turf.turf_phone }}</dd>
+      <dt>Email</dt><dd>{{ turf.turf_email }}</dd>
+      <dt>Size</dt><dd>{{ turf.turf_squarefeet|default:"Not specified" }}</dd>
+    </dl>
+  </div>
+
+  <aside class="panel">
+    <h2>Packages</h2>
+    {% for package in packages %}
+      <div class="row">
+        <div>
+          <strong>{{ package.pack_name }}</strong>
+          <span>{{ package.pack_type }}</span>
+        </div>
+        <div>Rs {{ package.pack_rate }}</div>
+      </div>
+    {% empty %}
+      <p>No packages are available yet.</p>
+    {% endfor %}
+    {% if packages %}
+      <a class="button primary full" href="{% url 'book_turf' turf.turf_id %}">Book this turf</a>
+    {% endif %}
+  </aside>
+</section>
+{% endblock %}

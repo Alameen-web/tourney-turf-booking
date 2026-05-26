@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Book {{ turf.turf_name }} - Tourney{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <div class="panel">
+    <h1>Book {{ turf.turf_name }}</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="button primary" type="submit">Send request</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
