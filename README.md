@@ -71,3 +71,13 @@ turffinal/
 ## Refactor Notes
 
 The project was simplified from a mixed older codebase. Removed pieces include shop/club routes, mobile API stubs, rent item imports, duplicate booking URLs, large unused frontend templates, and copied vendor static folders.
+
+## Free Deployment
+
+The simplest free deployment target for this project is PythonAnywhere.
+
+See:
+
+```text
+deployment/pythonanywhere.md
+```

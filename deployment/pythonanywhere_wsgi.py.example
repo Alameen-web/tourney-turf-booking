@@ -1,0 +1,20 @@
+import os
+import sys
+
+
+# Replace YOUR_USERNAME with your PythonAnywhere username.
+PROJECT_DIR = "/home/YOUR_USERNAME/Tourney"
+
+if PROJECT_DIR not in sys.path:
+    sys.path.insert(0, PROJECT_DIR)
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "turf.settings"
+os.environ["DJANGO_DEBUG"] = "0"
+os.environ["DJANGO_ALLOWED_HOSTS"] = "YOUR_USERNAME.pythonanywhere.com"
+os.environ["DJANGO_CSRF_TRUSTED_ORIGINS"] = "https://YOUR_USERNAME.pythonanywhere.com"
+os.environ["DJANGO_SECRET_KEY"] = "replace-this-with-a-long-random-secret-key"
+
+from django.core.wsgi import get_wsgi_application
+
+
+application = get_wsgi_application()
