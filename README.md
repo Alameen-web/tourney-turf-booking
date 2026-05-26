@@ -74,7 +74,7 @@ The project was simplified from a mixed older codebase. Removed pieces include s
 
 ## Free Deployment
 
-The project has deployment notes for PythonAnywhere and Railway.
+Use PythonAnywhere for a true no-cost Django deployment. Railway is also configured, but its free tier is credit-based and better for trials or demos.
 
 See these guides:
 

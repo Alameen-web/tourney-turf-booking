@@ -1,10 +1,12 @@
 # Deploy Tourney On PythonAnywhere Free
 
-PythonAnywhere is the easiest free option for this Django + SQLite project. It gives a free Beginner account one public web app at:
+PythonAnywhere is the easiest free option for this Django + SQLite project. A free account can run one public web app at:
 
 ```text
 https://YOUR_USERNAME.pythonanywhere.com/
 ```
+
+Current free accounts are small, so keep the repository lean: do not upload local virtualenvs, `db.sqlite3`, logs, `__pycache__`, or uploaded `media/` files.
 
 ## 1. Create A Free Account
 
